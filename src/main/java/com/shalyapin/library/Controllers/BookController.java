@@ -2,7 +2,6 @@ package com.shalyapin.library.Controllers;
 
 import com.shalyapin.library.dto.BookDTO;
 import com.shalyapin.library.entity.Book;
-import com.shalyapin.library.exception.BookException;
 import com.shalyapin.library.repository.AuthorRepository;
 import com.shalyapin.library.repository.BookRepository;
 import com.shalyapin.library.service.BookService;
@@ -13,18 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-//Правильно я понимаю что без спринг веб контроллеры не пишутся?
 @RestController
 @Slf4j
 @AllArgsConstructor
 @RequestMapping("/api/book")
 public class BookController {
-    private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
     private final BookService bookService;
 
+    //Нужно ли так делать? Перезагружать методы не получилось.
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks(@RequestParam(required = false) String title, @RequestParam(required = false) Long author_id) {
         if(title==null&&author_id==null) return new ResponseEntity<>(bookService.getAllBooks(),HttpStatus.OK);

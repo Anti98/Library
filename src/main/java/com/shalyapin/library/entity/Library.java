@@ -2,10 +2,8 @@ package com.shalyapin.library.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,4 +14,10 @@ public class Library {
     private Long id;
     private String name;
     private String address;
+
+  /*  @ManyToMany(mappedBy = "libraries")*/
+
+
+    @OneToMany(mappedBy ="library")
+    Set<LibraryBook> libraryBooks;
 }

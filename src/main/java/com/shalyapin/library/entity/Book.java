@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -25,5 +26,13 @@ public class Book {
    // @JsonIgnore
     private Author author;
     private String edition;
+    /*@ManyToMany()
+    @JoinTable(
+        name = "Book_Library",
+        joinColumns = @JoinColumn(name="book_id"),
+        inverseJoinColumns = @JoinColumn(name = "library_id"))
+        */
+    @OneToMany(mappedBy ="book")
+    private Set<LibraryBook> libraryBooks;
 
 }
